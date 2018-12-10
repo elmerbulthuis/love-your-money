@@ -5,6 +5,9 @@
   "main": "./node/main.js",
   "module": "./module/main.js",
   "types": "./types/main.d.ts",
+  "bin": {
+    "love-your-money": "./node/cli.js"
+  },
   "scripts": {
     "prepare": "npm run compile",
     "compile": "tsc && tsc --project tsconfig.module.json",
