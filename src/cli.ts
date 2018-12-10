@@ -3,11 +3,7 @@ import * as fs from "fs";
 main();
 
 async function main() {
-    fs.writeFileSync("/sys/class/gpio/export", "20");
-    fs.writeFileSync("/sys/class/gpio/export", "21");
-
-    fs.writeFileSync("/sys/class/gpio/gpio20/direction", "out");
-    fs.writeFileSync("/sys/class/gpio/gpio21/direction", "out");
+    setup();
 
     // Stekker 1 (Love You) blijft altijd aan
     loveyou(true);
@@ -50,6 +46,14 @@ async function main() {
         rmoney(false);
         await waitShort();
     }
+}
+
+function setup() {
+    fs.writeFileSync("/sys/class/gpio/export", "20");
+    fs.writeFileSync("/sys/class/gpio/export", "21");
+
+    fs.writeFileSync("/sys/class/gpio/gpio20/direction", "out");
+    fs.writeFileSync("/sys/class/gpio/gpio21/direction", "out");
 }
 
 function loveyou(value: boolean) {
