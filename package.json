@@ -6,7 +6,7 @@
   "module": "./module/main.js",
   "types": "./types/main.d.ts",
   "bin": {
-    "love-your-money": "./node/cli.js"
+    "love-your-money": "./node/program.js"
   },
   "scripts": {
     "prepare": "npm run compile",
