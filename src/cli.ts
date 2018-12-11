@@ -50,20 +50,32 @@ async function main() {
     }
 }
 
-function setup() {
-    fs.writeFileSync("/sys/class/gpio/export", "20");
-    fs.writeFileSync("/sys/class/gpio/export", "21");
+function write(path: string, value: string) {
+    // tslint:disable no-console
 
-    fs.writeFileSync("/sys/class/gpio/gpio20/direction", "out");
-    fs.writeFileSync("/sys/class/gpio/gpio21/direction", "out");
+    try {
+        console.log(`${value} -> ${path}`);
+        fs.writeFileSync(path, value);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
+function setup() {
+    write("/sys/class/gpio/export", "20");
+    write("/sys/class/gpio/export", "21");
+
+    write("/sys/class/gpio/gpio20/direction", "out");
+    write("/sys/class/gpio/gpio21/direction", "out");
 }
 
 function loveyou(value: boolean) {
-    fs.writeFileSync("/sys/class/gpio/gpio20/value", value ? "1" : "0");
+    write("/sys/class/gpio/gpio20/value", value ? "1" : "0");
 }
 
 function rmoney(value: boolean) {
-    fs.writeFileSync("/sys/class/gpio/gpio21/value", value ? "1" : "0");
+    write("/sys/class/gpio/gpio21/value", value ? "1" : "0");
 }
 
 async function waitShort() {
