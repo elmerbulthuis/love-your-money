@@ -24,15 +24,32 @@ async function main() {
         // love your money 30sec
         loveyou(true);
         rmoney(true);
-        await wait(30000);
+        await wait(1000 * 30);
 
         await Promise.all([
             (async () => {
+                let state = true;
+                let interval = 1000 * 1 / 2;
+
+                while (interval < 1000 * 5) {
+                    const random = Math.random();
+                    interval = Math.floor(interval / (1 - random / 2));
+                    await wait(interval);
+
+                    state = !state;
+
+                    loveyou(state);
+                }
+                loveyou(true);
+            })(),
+
+            (async () => {
                 let state = false;
-                let interval = 5000;
+                let interval = 1000 * 5;
 
                 while (interval > 100) {
-                    interval *= Math.floor(Math.random());
+                    const random = Math.random();
+                    interval = Math.floor(interval * (1 - random / 2));
                     await wait(interval);
 
                     state = !state;
@@ -42,29 +59,20 @@ async function main() {
                 rmoney(false);
             })(),
 
-            (async () => {
-                let state = true;
-                let interval = 500;
-
-                while (interval < 5000) {
-                    interval /= Math.floor(Math.random());
-                    await wait(interval);
-
-                    state = !state;
-
-                    loveyou(state);
-                }
-                loveyou(true);
-            })(),
         ]);
-
         // love you 30sec
-        loveyou(true);
-        rmoney(false);
-        await wait(30000);
+        // loveyou(true);
+        // rmoney(false);
+        await wait(1000 * 30);
 
+        loveyou(true);
+        rmoney(true);
+        await wait(200);
+
+        // off 5 sec
+        loveyou(false);
         rmoney(false);
-        await wait(1000);
+        await wait(1000 * 5);
     }
 }
 
