@@ -28,7 +28,7 @@ async function main() {
 
         {
             let state = false;
-            let interval = 1000 * 2;
+            let interval = 1000 * 1.5;
 
             while (interval > 100) {
                 const random = Math.random();
@@ -54,7 +54,7 @@ async function main() {
         // off 5 sec
         loveyou(false);
         rmoney(false);
-        await wait(1000 * 5);
+        await wait(1000 * 2);
     }
 }
 
