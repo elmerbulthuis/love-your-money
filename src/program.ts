@@ -26,40 +26,22 @@ async function main() {
         rmoney(true);
         await wait(1000 * 30);
 
-        await Promise.all([
-            (async () => {
-                let state = true;
-                let interval = 1000 * 1 / 2;
+        {
+            let state = false;
+            let interval = 1000 * 2;
 
-                while (interval < 1000 * 5) {
-                    const random = Math.random();
-                    interval = Math.floor(interval / (1 - random / 2));
-                    await wait(interval);
+            while (interval > 100) {
+                const random = Math.random();
+                interval = Math.floor(interval * (1 - random / 4));
+                await wait(interval);
 
-                    state = !state;
+                state = !state;
 
-                    loveyou(state);
-                }
-                loveyou(true);
-            })(),
+                rmoney(state);
+            }
+            rmoney(false);
+        }
 
-            (async () => {
-                let state = false;
-                let interval = 1000 * 5;
-
-                while (interval > 100) {
-                    const random = Math.random();
-                    interval = Math.floor(interval * (1 - random / 2));
-                    await wait(interval);
-
-                    state = !state;
-
-                    rmoney(state);
-                }
-                rmoney(false);
-            })(),
-
-        ]);
         // love you 30sec
         // loveyou(true);
         // rmoney(false);
